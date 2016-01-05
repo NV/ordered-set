@@ -1,0 +1,46 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OrderedSet tests</title>
+
+    <link rel="stylesheet" href="vendor/objectDiff/objectDiff.css">
+    <script src="vendor/objectDiff/objectDiff.js"></script>
+    <script src="vendor/objectDiff/jasmine-objectDiff.js"></script>
+
+    <link rel="stylesheet" href="vendor/jasmine/jasmine.css">
+    <script src="vendor/jasmine/jasmine.js"></script>
+    <link rel="stylesheet" href="vendor/jasmine-html-reporter/HtmlReporter.css">
+    <script src="vendor/jasmine-html-reporter/HtmlReporter.js"></script>
+
+    <script>
+    beforeEach(function() {
+        this.addMatchers(objectDiff.jasmine);
+    });
+    </script>
+
+    <script src="../linked-list.js"></script>
+    <script src="linked-list.spec.js"></script>
+
+    <script src="../ordered-set.js"></script>
+    <script src="ordered-set.spec.js"></script>
+
+    <script src="../ordered-2d-set.js"></script>
+    <script src="ordered-2d-set.spec.js"></script>
+
+    <script>
+    var htmlReporter = new jasmine.HtmlReporter();
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.updateInterval = 1000;
+    jasmineEnv.addReporter(htmlReporter);
+    jasmineEnv.specFilter = htmlReporter.specFilter;
+
+    window.onload = function() {
+        jasmineEnv.execute();
+    };
+    </script>
+    <link id="favicon_pass" href="vendor/jasmine-html-reporter/pass.png"/>
+    <link id="favicon_fail" href="vendor/jasmine-html-reporter/fail.png"/>
+</head>
+<body></body>
+</html>
