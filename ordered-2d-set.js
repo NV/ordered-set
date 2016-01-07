@@ -6,8 +6,13 @@ class Ordered2DSet
     {
         this._list = new LinkedList;
 
-        // itemA -> mapB
+        // id -> node
         this._map = new Map;
+
+        // itemA or itemB -> id
+        this._ids = new Map;
+
+        this._lastId = 0;
     }
 
     get size()
@@ -17,66 +22,103 @@ class Ordered2DSet
 
     add(a, b)
     {
-        var mapB = this._map.get(a);
-        if (!mapB) {
-            mapB = new Map;
-            this._map.set(a, mapB);
+        var idA = this._ids.get(a);
+        if (!idA) {
+            idA = this._nextId();
+            this._ids.set(a, idA);
         }
 
-        var node = mapB.get(b);
+        var idB = this._ids.get(b);
+        if (!idB) {
+            idB = this._nextId();
+            this._ids.set(b, idB);
+        }
+
+        var id = this._buildId(idA, idB);
+        var node = this._map.get(id);
         if (node)
             node.value = [a, b];
         else {
             node = this._list.push([a, b]);
-            mapB.set(b, node);
+            this._map.set(id, node);
         }
     }
 
-    "delete"(a, b) {
-        var mapB = this._map.get(a);
-        if (!mapB)
+    "delete"(a, b)
+    {
+        var idA = this._ids.get(a);
+        if (!idA)
             return false;
 
-        var node = mapB.get(b);
-        if (!node)
+        var idB = this._ids.get(b);
+        if (!idB)
             return false;
 
-        mapB.delete(b);
+        var id = this._buildId(idA, idB);
+        var node = this._map.get(id);
+        if (!node) {
+            // FIXME: Since we never clear this._ids maps, it can cause memory leaks.
+            return false;
+        }
+
         this._list.delete(node);
+        this._map.delete(id);
+
         return true;
     }
 
-
-    has(a, b) {
-        var mapB = this._map.get(a);
-        if (!mapB)
+    has(a, b)
+    {
+        var idA = this._ids.get(a);
+        if (!idA)
             return false;
 
-        return mapB.has(b);
+        var idB = this._ids.get(b);
+        if (!idB)
+            return false;
+
+        return this._map.has(this._buildId(idA, idB));
     }
 
-    clear() {
+    clear()
+    {
+        this._ids = new Map;
         this._map = new Map;
         this._list = new LinkedList;
+        this._lastId = 0;
     }
 
-    forEach(callback) {
+    forEach(callback)
+    {
         this._list.forEach(callback);
     }
 
-    toArray() {
+    toArray()
+    {
         return this._list.toArray();
     }
 
-    toJSON() {
+    toJSON()
+    {
         return this.toArray();
     }
 
-    [Symbol.iterator]() {
+    [Symbol.iterator]()
+    {
         return this._list[Symbol.iterator]();
     }
 
-    inspect() {
+    inspect()
+    {
         console.table(this._list.toArray());
+    }
+
+    _buildId(idA, idB)
+    {
+        return idA + "-" + idB;
+    }
+
+    _nextId() {
+        return ++this._lastId;
     }
 }
