@@ -81,6 +81,39 @@ describe("Ordered2DSet", function() {
         expect(set.size).toBe(3);
     });
 
+    it("deleteColumn(itemA)", function() {
+        var set = new Ordered2DSet();
+
+        set.add(0, 1);
+        set.add(0, 2);
+        set.add(1, 0);
+        set.add(2, 1);
+
+        set.deleteColumn(0);
+
+        expect(set.size).toBe(2);
+        expect(set.toArray()).toEqual([
+            [1, 0],
+            [2, 1]
+        ]);
+    });
+
+    it("deleteColumn(itemA)", function() {
+        var set = new Ordered2DSet();
+
+        set.add("opossum", "badger");
+        set.add("opossum", "raccoon");
+
+        set.deleteColumn("badger");
+        set.deleteColumn("raccoon");
+
+        expect(set.size).toBe(2);
+        expect(set.toArray()).toEqual([
+            ["opossum", "badger"],
+            ["opossum", "raccoon"]
+        ]);
+    });
+
     it("has(itemA, itemB)", function() {
         var set = new Ordered2DSet();
         set.add("opossum", "badger");

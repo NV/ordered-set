@@ -46,6 +46,19 @@ class Ordered2DSet
         return true;
     }
 
+    deleteColumn(a)
+    {
+        var mapB = this._map.get(a);
+        if (!mapB)
+            return false;
+
+        var list = this._list;
+        mapB.forEach(function(node) {
+            list.delete(node);
+        });
+
+        this._map.delete(a);
+    }
 
     has(a, b) {
         var mapB = this._map.get(a);
