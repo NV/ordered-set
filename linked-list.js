@@ -20,7 +20,18 @@ class LinkedList
         return this.head.prev || this.head;
     }
 
-    push(...items)
+    push(item)
+    {
+        var newNode = new LinkedListNode(item);
+        this.last.addAfter(newNode);
+        this.length++;
+
+        return newNode;
+    }
+
+    // Rest parameters (...items) cause deopt.
+    // When pushing only one item, use push method instead.
+    pushMany(...items)
     {
         var last = this.last;
         for (let item of items) {

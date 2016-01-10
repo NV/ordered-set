@@ -5,7 +5,7 @@ describe("LinkedList", function() {
     it("constructor()", function () {
         var list = new LinkedList();
 
-        list.push("one", "two");
+        list.pushMany("one", "two");
         expect(list.length).toBe(2);
 
         list.push("three");
