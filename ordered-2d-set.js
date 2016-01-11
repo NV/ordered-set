@@ -32,7 +32,8 @@ class Ordered2DSet
         }
     }
 
-    "delete"(a, b) {
+    "delete"(a, b)
+    {
         var mapB = this._map.get(a);
         if (!mapB)
             return false;
@@ -60,7 +61,8 @@ class Ordered2DSet
         this._map.delete(a);
     }
 
-    has(a, b) {
+    has(a, b)
+    {
         var mapB = this._map.get(a);
         if (!mapB)
             return false;
@@ -68,28 +70,34 @@ class Ordered2DSet
         return mapB.has(b);
     }
 
-    clear() {
+    clear()
+    {
         this._map = new Map;
         this._list = new LinkedList;
     }
 
-    forEach(callback) {
+    forEach(callback)
+    {
         this._list.forEach(callback);
     }
 
-    toArray() {
+    toArray()
+    {
         return this._list.toArray();
     }
 
-    toJSON() {
+    toJSON()
+    {
         return this.toArray();
     }
 
-    [Symbol.iterator]() {
+    [Symbol.iterator]()
+    {
         return this._list[Symbol.iterator]();
     }
 
-    inspect() {
+    inspect()
+    {
         console.table(this._list.toArray());
     }
 }
