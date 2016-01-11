@@ -29,9 +29,7 @@ class LinkedList
         return newNode;
     }
 
-    // Rest parameters (...items) cause deopt.
-    // When pushing only one item, use push method instead.
-    pushMany(...items)
+    pushMany(items)
     {
         var last = this.last;
         for (let item of items) {
@@ -127,13 +125,15 @@ class LinkedListNode
 
 class LinkedListIterator
 {
-    constructor(head) {
+    constructor(head)
+    {
         this.head = head;
         this.at = head.next;
         this.index = 0;
     }
 
-    next() {
+    next()
+    {
         if (this.at === this.head)
             return {done: true};
         else {

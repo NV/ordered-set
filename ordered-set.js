@@ -2,7 +2,7 @@
 
 class OrderedSet
 {
-    constructor(...items)
+    constructor(items)
     {
         this._list = new LinkedList;
 

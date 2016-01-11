@@ -9,13 +9,13 @@ describe("OrderedSet", function() {
     });
 
     it("constructor(uniqItemsList)", function() {
-        var orderedSet = new OrderedSet("cero", "uno", "dos", "tres");
+        var orderedSet = new OrderedSet(["cero", "uno", "dos", "tres"]);
         expect(orderedSet.toArray()).toEqualOwnProperties(["cero", "uno", "dos", "tres"]);
         expect(orderedSet.size).toBe(4);
     });
 
     it("constructor(nonUniqItemsList)", function() {
-        var orderedSet = new OrderedSet("cero", "cero", "uno", "cero", "dos");
+        var orderedSet = new OrderedSet(["cero", "cero", "uno", "cero", "dos"]);
         expect(orderedSet.toArray()).toEqualOwnProperties(["cero", "uno", "dos"]);
         expect(orderedSet.size).toBe(3);
     });
@@ -63,7 +63,7 @@ describe("OrderedSet", function() {
     });
 
     it("has(item)", function() {
-        var orderedSet = new OrderedSet("badger", "raccoon");
+        var orderedSet = new OrderedSet(["badger", "raccoon"]);
         orderedSet.add("opossum");
 
         expect(orderedSet.has("badger")).toBe(true);
@@ -79,7 +79,7 @@ describe("OrderedSet", function() {
 
     it("clear()", function() {
         var digits = ["zero", "one", "two"];
-        var orderedSet = new OrderedSet(...digits);
+        var orderedSet = new OrderedSet(digits);
         orderedSet.clear();
 
         expect(orderedSet.toArray()).toEqualOwnProperties([]);
@@ -105,7 +105,7 @@ describe("OrderedSet", function() {
     });
 
     it("forEach", function() {
-        var orderedSet = new OrderedSet("badger", "raccoon");
+        var orderedSet = new OrderedSet(["badger", "raccoon"]);
         orderedSet.add("opossum");
 
         var list = [];
@@ -116,7 +116,7 @@ describe("OrderedSet", function() {
     });
 
     it("for of", function() {
-        var orderedSet = new OrderedSet("badger", "raccoon");
+        var orderedSet = new OrderedSet(["badger", "raccoon"]);
         orderedSet.add("opossum");
 
         var list = [];
