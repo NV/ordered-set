@@ -28,6 +28,8 @@ class Ordered2DSet
             node = this._list.push([a, b]);
             mapB.set(b, node);
         }
+
+        return this;
     }
 
     "delete"(a, b)

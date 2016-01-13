@@ -11,8 +11,7 @@ describe("Ordered2DSet", function() {
     it("add(uniqA, uniqB)", function() {
         var set = new Ordered2DSet();
 
-        set.add("zero", "one");
-        set.add("two", "three");
+        set.add("zero", "one").add("two", "three");
 
         expect(set.toArray()).toEqualOwnProperties([["zero", "one"], ["two", "three"]]);
         expect(set.size).toBe(2);
