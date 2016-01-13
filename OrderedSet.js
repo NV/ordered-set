@@ -23,9 +23,7 @@ class OrderedSet
     add(item)
     {
         var node = this._map.get(item);
-        if (node)
-            node.value = item;
-        else {
+        if (!node) {
             node = this._list.push(item);
             this._map.set(item, node);
         }

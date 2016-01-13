@@ -24,9 +24,7 @@ class Ordered2DSet
         }
 
         var node = mapB.get(b);
-        if (node)
-            node.value = [a, b];
-        else {
+        if (!node) {
             node = this._list.push([a, b]);
             mapB.set(b, node);
         }
