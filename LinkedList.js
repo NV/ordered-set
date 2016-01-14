@@ -136,11 +136,10 @@ class LinkedListIterator
     {
         if (this.at === this.head)
             return {done: true};
-        else {
-            this.index++;
-            var at = this.at;
-            this.at = at.next;
-            return {done: false, value: at.value};
-        }
+
+        this.index++;
+        var at = this.at;
+        this.at = at.next;
+        return {done: false, value: at.value};
     }
 }
