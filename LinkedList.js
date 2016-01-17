@@ -17,38 +17,33 @@ class LinkedList
 
     get last()
     {
-        return this.head.prev || this.head;
+        return this.head.prev;
     }
 
     push(item)
     {
-        var newNode = new LinkedListNode(item);
-        this.last.addAfter(newNode);
+        let newNode = new LinkedListNode(item);
+        let last = this.last;
+        let head = this.head;
+
+        last.next = newNode;
+        newNode.next = head;
+        head.prev = newNode;
+        newNode.prev = last;
+
         this.length++;
 
         return newNode;
     }
 
-    pushMany(items)
-    {
-        var last = this.last;
-        for (let item of items) {
-            var newNode = new LinkedListNode(item);
-            last.addAfter(newNode);
-            last = newNode;
-        }
-
-        this.length += items.length;
-
-        return last;
-    }
-
-    "delete"(node)
+    remove(node)
     {
         if (!node)
             return false;
 
-        node.delete();
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+
         this.length--;
         return true;
     }
@@ -95,30 +90,6 @@ class LinkedListNode
         this.value = value;
         this.prev = null;
         this.next = null;
-    }
-
-    "delete"()
-    {
-        this.prev.next = this.next;
-        this.next.prev = this.prev;
-    }
-
-    addBefore(node)
-    {
-        var prev = this.prev;
-        this.prev = node;
-        node.prev = prev;
-        prev.next = node;
-        node.next = this;
-    }
-
-    addAfter(node)
-    {
-        var next = this.next;
-        this.next = node;
-        node.next = next;
-        next.prev = node;
-        node.prev = this;
     }
 }
 

@@ -38,7 +38,7 @@ class OrderedSet
             return false;
 
         this._map.delete(item);
-        this._list.delete(node);
+        this._list.remove(node);
         return true;
     }
 

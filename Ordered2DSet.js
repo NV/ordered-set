@@ -43,7 +43,7 @@ class Ordered2DSet
             return false;
 
         mapB.delete(b);
-        this._list.delete(node);
+        this._list.remove(node);
         return true;
     }
 
@@ -55,7 +55,7 @@ class Ordered2DSet
 
         var list = this._list;
         mapB.forEach(function(node) {
-            list.delete(node);
+            list.remove(node);
         });
 
         this._map.delete(a);
