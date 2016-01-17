@@ -80,7 +80,7 @@ describe("Ordered2DSet", function() {
         expect(set.size).toBe(3);
     });
 
-    it("deleteColumn(itemA)", function() {
+    it("deleteColumn(existingItemA)", function() {
         let set = new Ordered2DSet();
 
         set.add(0, 1);
@@ -88,7 +88,7 @@ describe("Ordered2DSet", function() {
         set.add(1, 0);
         set.add(2, 1);
 
-        set.deleteColumn(0);
+        expect(set.deleteColumn(0)).toBe(true);
 
         expect(set.size).toBe(2);
         expect(set.toArray()).toEqual([
@@ -97,14 +97,14 @@ describe("Ordered2DSet", function() {
         ]);
     });
 
-    it("deleteColumn(itemA)", function() {
+    it("deleteColumn(missingItemA)", function() {
         let set = new Ordered2DSet();
 
         set.add("opossum", "badger");
         set.add("opossum", "raccoon");
 
-        set.deleteColumn("badger");
-        set.deleteColumn("raccoon");
+        expect(set.deleteColumn("badger")).toBe(false);
+        expect(set.deleteColumn("raccoon")).toBe(false);
 
         expect(set.size).toBe(2);
         expect(set.toArray()).toEqual([

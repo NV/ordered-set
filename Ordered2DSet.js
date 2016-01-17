@@ -54,11 +54,14 @@ class Ordered2DSet
             return false;
 
         let list = this._list;
+        let didDelete = false;
         mapB.forEach(function(node) {
             list.remove(node);
+            didDelete = true;
         });
 
         this._map.delete(a);
+        return didDelete;
     }
 
     has(a, b)
