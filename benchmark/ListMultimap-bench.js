@@ -29,7 +29,7 @@ ObservableArray.prototype = {
 
 
 function ObservableOrderedSet() {
-    this._listeners = new Ordered2DSet();
+    this._listeners = new ListMultimap();
 }
 
 ObservableOrderedSet.prototype = {

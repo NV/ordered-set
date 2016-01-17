@@ -104,24 +104,14 @@ describe("OrderedSet", function() {
         expect(orderedSet.toArray()).toEqualOwnProperties(["zero", "two", "three", "four"]);
     });
 
-    it("forEach", function() {
+    xit("forEach", function() {
         let orderedSet = new OrderedSet(["badger", "raccoon"]);
         orderedSet.add("opossum");
 
         let list = [];
-        for (let item of orderedSet)
+        orderedSet.forEach(function(item) {
             list.push(item);
-
-        expect(list).toEqual(["badger", "raccoon", "opossum"]);
-    });
-
-    it("for of", function() {
-        let orderedSet = new OrderedSet(["badger", "raccoon"]);
-        orderedSet.add("opossum");
-
-        let list = [];
-        for (let item of orderedSet)
-            list.push(item);
+        });
 
         expect(list).toEqual(["badger", "raccoon", "opossum"]);
     });

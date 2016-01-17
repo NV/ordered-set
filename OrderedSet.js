@@ -31,7 +31,7 @@ class OrderedSet
         return this;
     }
 
-    "delete"(item)
+    delete(item)
     {
         let node = this._map.get(item);
         if (!node)
@@ -61,10 +61,5 @@ class OrderedSet
     toJSON()
     {
         return this.toArray();
-    }
-
-    [Symbol.iterator]()
-    {
-        return this._list[Symbol.iterator]();
     }
 }

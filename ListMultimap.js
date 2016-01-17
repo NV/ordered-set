@@ -23,90 +23,95 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-class LinkedList
+class ListMultimap
 {
     constructor()
     {
-        this.head = new LinkedListNode;
-        this.head.next = this.head.prev = this.head;
-        this.length = 0;
+        this._insertionOrderedEntries = new LinkedList;
+        this._keyMap = new Map;
+    }
+
+    get size()
+    {
+        return this._insertionOrderedEntries.length;
+    }
+
+    add(key, value)
+    {
+        let nodeMap = this._keyMap.get(key);
+        if (!nodeMap) {
+            nodeMap = new Map;
+            this._keyMap.set(key, nodeMap);
+        }
+
+        let node = nodeMap.get(value);
+        if (!node) {
+            node = this._insertionOrderedEntries.push([key, value]);
+            nodeMap.set(value, node);
+        }
+
+        return this;
+    }
+
+    delete(key, value)
+    {
+        let nodeMap = this._keyMap.get(key);
+        if (!nodeMap)
+            return false;
+
+        let node = nodeMap.get(value);
+        if (!node)
+            return false;
+
+        nodeMap.delete(value);
+        this._insertionOrderedEntries.remove(node);
+        return true;
+    }
+
+    deleteAll(key)
+    {
+        let nodeMap = this._keyMap.get(key);
+        if (!nodeMap)
+            return false;
+
+        let list = this._insertionOrderedEntries;
+        let didDelete = false;
+        nodeMap.forEach(function(node) {
+            list.remove(node);
+            didDelete = true;
+        });
+
+        this._keyMap.delete(key);
+        return didDelete;
+    }
+
+    has(key, value)
+    {
+        let nodeMap = this._keyMap.get(key);
+        if (!nodeMap)
+            return false;
+
+        return nodeMap.has(value);
     }
 
     clear()
     {
-        this.head.next = this.head.prev = this.head;
-        this.length = 0;
-    }
-
-    get last()
-    {
-        return this.head.prev;
-    }
-
-    push(item)
-    {
-        let newNode = new LinkedListNode(item);
-        let last = this.last;
-        let head = this.head;
-
-        last.next = newNode;
-        newNode.next = head;
-        head.prev = newNode;
-        newNode.prev = last;
-
-        this.length++;
-
-        return newNode;
-    }
-
-    remove(node)
-    {
-        if (!node)
-            return false;
-
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
-
-        this.length--;
-        return true;
+        this._keyMap = new Map;
+        this._insertionOrderedEntries = new LinkedList;
     }
 
     forEach(callback)
     {
-        let node = this.head;
-        for (let i = 0, length = this.length; i < length; i++) {
-            node = node.next;
-            let returnValue = callback(node.value, i);
-            if (returnValue === false)
-                return;
-        }
+        this._insertionOrderedEntries.forEach(callback);
     }
 
     toArray()
     {
-        let node = this.head;
-        let i = this.length;
-        let result = new Array(i);
-        while (i--) {
-            node = node.prev;
-            result[i] = node.value;
-        }
-        return result;
+        return this._insertionOrderedEntries.toArray();
     }
 
     toJSON()
     {
         return this.toArray();
-    }
-}
-
-
-class LinkedListNode
-{
-    constructor(value)
-    {
-        this.value = value;
-        this.prev = null;
-        this.next = null;
     }
 }
