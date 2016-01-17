@@ -17,13 +17,13 @@ class Ordered2DSet
 
     add(a, b)
     {
-        var mapB = this._map.get(a);
+        let mapB = this._map.get(a);
         if (!mapB) {
             mapB = new Map;
             this._map.set(a, mapB);
         }
 
-        var node = mapB.get(b);
+        let node = mapB.get(b);
         if (!node) {
             node = this._list.push([a, b]);
             mapB.set(b, node);
@@ -34,11 +34,11 @@ class Ordered2DSet
 
     "delete"(a, b)
     {
-        var mapB = this._map.get(a);
+        let mapB = this._map.get(a);
         if (!mapB)
             return false;
 
-        var node = mapB.get(b);
+        let node = mapB.get(b);
         if (!node)
             return false;
 
@@ -49,11 +49,11 @@ class Ordered2DSet
 
     deleteColumn(a)
     {
-        var mapB = this._map.get(a);
+        let mapB = this._map.get(a);
         if (!mapB)
             return false;
 
-        var list = this._list;
+        let list = this._list;
         mapB.forEach(function(node) {
             list.remove(node);
         });
@@ -63,7 +63,7 @@ class Ordered2DSet
 
     has(a, b)
     {
-        var mapB = this._map.get(a);
+        let mapB = this._map.get(a);
         if (!mapB)
             return false;
 

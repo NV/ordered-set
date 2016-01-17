@@ -10,7 +10,7 @@ class OrderedSet
         this._map = new Map;
 
         if (items) {
-            for (var item of items)
+            for (let item of items)
                 this.add(item);
         }
     }
@@ -22,7 +22,7 @@ class OrderedSet
 
     add(item)
     {
-        var node = this._map.get(item);
+        let node = this._map.get(item);
         if (!node) {
             node = this._list.push(item);
             this._map.set(item, node);
@@ -33,7 +33,7 @@ class OrderedSet
 
     "delete"(item)
     {
-        var node = this._map.get(item);
+        let node = this._map.get(item);
         if (!node)
             return false;
 

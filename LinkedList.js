@@ -50,10 +50,10 @@ class LinkedList
 
     forEach(callback)
     {
-        var node = this.head;
-        for (var i = 0, length = this.length; i < length; i++) {
+        let node = this.head;
+        for (let i = 0, length = this.length; i < length; i++) {
             node = node.next;
-            var returnValue = callback(node.value, i);
+            let returnValue = callback(node.value, i);
             if (returnValue === false)
                 return;
         }
@@ -61,9 +61,9 @@ class LinkedList
 
     toArray()
     {
-        var node = this.head;
-        var i = this.length;
-        var result = new Array(i);
+        let node = this.head;
+        let i = this.length;
+        let result = new Array(i);
         while (i--) {
             node = node.prev;
             result[i] = node.value;
@@ -109,7 +109,7 @@ class LinkedListIterator
             return {done: true};
 
         this.index++;
-        var at = this.at;
+        let at = this.at;
         this.at = at.next;
         return {done: false, value: at.value};
     }

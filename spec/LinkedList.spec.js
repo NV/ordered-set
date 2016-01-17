@@ -3,10 +3,10 @@
 describe("LinkedList", function() {
 
     it("constructor()", function() {
-        var list = new LinkedList();
+        let list = new LinkedList();
 
         list.push("one");
-        var nodeTwo = list.push("two");
+        let nodeTwo = list.push("two");
         expect(list.length).toBe(2);
 
         list.push("three");

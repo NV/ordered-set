@@ -3,13 +3,13 @@
 describe("Ordered2DSet", function() {
 
     it("constructor()", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
         expect(set.toArray()).toEqualOwnProperties([]);
         expect(set.size).toBe(0);
     });
 
     it("add(uniqA, uniqB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add("zero", "one").add("two", "three");
 
@@ -18,7 +18,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("add(nonUniqA, uniqB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add("zero", "one");
         set.add("zero", "two");
@@ -28,7 +28,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("add(uniqA, nonUniqB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add("zero", "one");
         set.add("two", "one");
@@ -39,7 +39,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("add(nonUniqA, nonUniqB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add("zero", "one");
         set.add("two", "one");
@@ -51,7 +51,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("delete(existingItemA, existingItemB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add(0, 1);
         set.add(2, 3);
@@ -65,7 +65,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("delete(missingItemA, missingItemB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add(0, 1);
         set.add(2, 3);
@@ -81,7 +81,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("deleteColumn(itemA)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add(0, 1);
         set.add(0, 2);
@@ -98,7 +98,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("deleteColumn(itemA)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
 
         set.add("opossum", "badger");
         set.add("opossum", "raccoon");
@@ -114,7 +114,7 @@ describe("Ordered2DSet", function() {
     });
 
     it("has(itemA, itemB)", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
         set.add("opossum", "badger");
         set.add("opossum", "raccoon");
 
@@ -129,8 +129,8 @@ describe("Ordered2DSet", function() {
     });
 
     it("clear()", function() {
-        var digits = ["zero", "one", "two"];
-        var set = new Ordered2DSet();
+        let digits = ["zero", "one", "two"];
+        let set = new Ordered2DSet();
         set.add("badger", "raccoon");
         set.clear();
 
@@ -141,11 +141,11 @@ describe("Ordered2DSet", function() {
     });
 
     it("forEach", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
         set.add("Platypus", "Sugar glider");
         set.add("Quoll", "Wallaby");
 
-        var list = [];
+        let list = [];
         set.forEach(function(pair) {
             list.push(pair);
         });
@@ -154,11 +154,11 @@ describe("Ordered2DSet", function() {
     });
 
     it("for of", function() {
-        var set = new Ordered2DSet();
+        let set = new Ordered2DSet();
         set.add("Quoll", "Wallaby");
 
-        var list = [];
-        for (var item of set)
+        let list = [];
+        for (let item of set)
             list.push(item);
 
         expect(list).toEqual([["Quoll", "Wallaby"]]);
